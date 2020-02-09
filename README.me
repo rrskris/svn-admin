@@ -1,0 +1,5 @@
+Below is the command I wrote to extract the directories from the Old-SVN dump by excluding empty revisions there by creating individual SVN repos with directory names.
+This came in handy when the developers comitted 15 different projects code into an SVN trunk and they had to seperate them all per project by retaining its own revsion history. 
+
+
+for i in `cat list`; do sudo svndumpfilter --drop-empty-revs --renumber-revs exclude `cat listofprojects | awk {'print $1'} | grep -v $i` < Old-SVN.dump > `echo $i | sed -e 's/\///g'`.dump; done
